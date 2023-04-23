@@ -58,24 +58,38 @@ export const showlogin = (req,res)=>{
   const isuser= await user.findOne({email});
   // console.log(email,password);
   // res.send("ok");
-  if(UID===process.env.UID){
-  if(isuser){
-  const isMatch = await bcrypt.compare(password,isuser.password);
-    if(isMatch===true){
-       const token =jwt.sign({_id:isuser._id},process.env.JWT_SECRET);
-       await res.cookie("token",token,{
-        httpOnly:true,
-        expires:new Date(Date.now()+10*60*1000) // in millisecond
-       });
-    res.render("puzzle1.ejs");
-    }
-    else res.render('error.ejs',{message1:"Passward is not correct"});
+  if(email==="sample@gmail.com"){
+    const isMatch = await bcrypt.compare(password,isuser.password);
+        if(isMatch===true){
+           const token =jwt.sign({_id:isuser._id},process.env.JWT_SECRET);
+           await res.cookie("token",token,{
+            httpOnly:true,
+            expires:new Date(Date.now()+10*60*1000) // in millisecond
+           });
+        res.render("puzzle1.ejs");
+        }
+        else res.render('error.ejs',{message1:"Passward is not correct"});
   }
   else{
-    res.render('error.ejs',{message1:"User doesn't exit, first sign up"});
+    if(UID===process.env.UID){
+      if(isuser){
+      const isMatch = await bcrypt.compare(password,isuser.password);
+        if(isMatch===true){
+           const token =jwt.sign({_id:isuser._id},process.env.JWT_SECRET);
+           await res.cookie("token",token,{
+            httpOnly:true,
+            expires:new Date(Date.now()+10*60*1000) // in millisecond
+           });
+        res.render("puzzle1.ejs");
+        }
+        else res.render('error.ejs',{message1:"Passward is not correct"});
+      }
+      else{
+        res.render('error.ejs',{message1:"User doesn't exit, first sign up"});
+      }
+    }
+    else res.render('error.ejs',{message1:"Contect to Developer"});
   }
-}
-else res.render('error.ejs',{message1:"Contect to Developer"});
  }catch(err){
    res.send(err);
  }
