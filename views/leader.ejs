@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeaderBoard</title>
+    <style>
+     body{
+    background-image: url("/public/img/back2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#data{
+    color: white;
+    font-weight: 600;
+}
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="text-center">LEADERBOARD</h1>
+    <div class="container">
+    <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">level</th>
+          </tr>
+        </thead>
+        <tbody id="data">
+         
+        </tbody>
+      </table>
+    </div>
+    <script>
+    import {user} from "../models/user.js"
+    fetch 
+     const findall = await user.find({});
+  console.log(findall);
+  const tot=findall.map((obj)=>{
+   tableData+=`
+        <tr>
+        <td>${obj.name}</td>
+        <td>${obj.puzzle1}</td>
+        </tr>`;
+  })
+  document.getElementById("data").innerHTML=tableData;
+    </script>
+</body>
+</html>
