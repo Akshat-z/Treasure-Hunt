@@ -35,18 +35,39 @@
       </table>
     </div>
     <script>
-    import {user} from "../models/user.js"
-    fetch 
-     const findall = await user.find({});
-  console.log(findall);
-  const tot=findall.map((obj)=>{
-   tableData+=`
-        <tr>
-        <td>${obj.name}</td>
-        <td>${obj.puzzle1}</td>
-        </tr>`;
-  })
-  document.getElementById("data").innerHTML=tableData;
+  //   import {user} from "../models/user.js"
+  //   fetch 
+  //    const findall = await user.find({});
+  // console.log(findall);
+  // const tot=findall.map((obj)=>{
+  //  tableData+=`
+  //       <tr>
+  //       <td>${obj.name}</td>
+  //       <td>${obj.puzzle1}</td>
+  //       </tr>`;
+  // })
+  // document.getElementById("data").innerHTML=tableData;
+  let x="http://localhost:3000/view";
+fetch(x).then((data)=>{
+    return data.json();// converted to object
+}).then((ObjectData)=>{
+  // console.log(ObjectData);
+  let tableData="";
+  ObjectData.forEach(values => {
+     tableData+=`
+     <tr>
+       <td>${values.name}</td>
+        <td>${values.puzzle1}</td>
+         <td>${values.puzzle2}</td>
+          <td>${values.puzzle3}</td>
+         <td>${values.puzzle4}</td>
+        <td>${values.puzzle5}</td>
+       </tr>`;   
+  });
+  console.log(tableData);
+  document.getElementById("data").innerHTML=tableData;  
+});
+
     </script>
 </body>
 </html>
